@@ -16,8 +16,9 @@ jobs:
       - name: Get Date
         id: get-date
         run: |
-          echo "{name}={value}" >> $GITHUB_OUTPUT
-        shell: bash
+          echo "${{ name }}=${{ value }}" >> $GITHUB_OUTPUT
+          shell: bash
+
 
       - name: Cache Buildozer global directory
         uses: actions/cache@v4
@@ -34,7 +35,7 @@ jobs:
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
-          command: buildozer android debug 2>/dev/null
+          command: buildozer android debug 2
           buildozer_version: stable
 
 
