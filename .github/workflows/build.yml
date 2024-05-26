@@ -14,12 +14,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Unset extraheader from Git config
+        run: git config --global --unset http.https://github.com/.extraheader
+
       # used to cache dependencies with a timeout
-      - name: Get Date
-        id: get-date
-        run: |
-          echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
-        shell: bash
+      - name: Set output to file
+        run: echo "MY_OUTPUT=${{ steps.step_id.outputs.my_output }}" >> $GITHUB_ENV
+
+      - name: Read output from file
+        run: echo $MY_OUTPUT
 
       - name: Cache Buildozer global directory
         uses: actions/cache@v4
