@@ -1,29 +1,31 @@
 name: CI
+
 on:
   push:
-    branches: [ main ]
+    branches: 
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-     # used to cache dependencies with a timeout
       - name: Get Date
         id: get-date
         run: |
-          echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
-        shell: bash
+          echo "::set-output name=date::$(date -u "+%Y%m%d")"
 
       - name: Cache Buildozer global directory
         uses: actions/cache@v2
         with:
           path: .buildozer_global
-          key: buildozer-global-${{ hashFiles('buildozer.spec') }} # Replace with your path
+          key: buildozer-global-${{ hashFiles('buildozer.spec') }}
 
-      - uses: actions/cache@v2
+      - name: Cache Buildozer directory
+        uses: actions/cache@v2
         with:
           path: .buildozer
           key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('buildozer.spec') }}
@@ -34,6 +36,12 @@ jobs:
         with:
           command: buildozer android debug
           buildozer_version: stable
+
+      - name: Set output value to environment file
+        run: echo "OUTPUT_NAME=VALUE" >> $GITHUB_ENV
+
+      - name: Read output from Environment File
+        run: echo "Output:$OUTPUT_NAME"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
