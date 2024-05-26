@@ -34,8 +34,9 @@ jobs:
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
-          command: buildozer android debug
+          command: buildozer android debug 2>/dev/null
           buildozer_version: stable
+
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
