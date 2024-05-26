@@ -37,7 +37,7 @@ jobs:
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
-          command: buildozer android debug 2>/dev/null
+          command: buildozer android debug 2
           buildozer_version: stable
 
 
