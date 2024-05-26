@@ -10,7 +10,7 @@ jobs:
 
     steps:
       # Reference a specific commit
-      - uses: actions/checkout@4
+      - uses: actions/checkout@v4
 
       # Used to cache dependencies with a timeout
       - name: Get Date
