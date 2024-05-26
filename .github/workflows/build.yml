@@ -12,13 +12,15 @@ jobs:
       # Reference a specific commit
       - uses: actions/checkout@v4
 
+      - name: Remove extraheader from git config
+        run: git config --unset http.https://github.com/.extraheader
+
       # Used to cache dependencies with a timeout
       - name: Get Date
         id: get-date
         run: |
-          echo "${{ name }}=${{ value }}" >> $GITHUB_OUTPUT
-          shell: bash
-
+          echo "{name}={value}" >> $GITHUB_OUTPUT
+        shell: bash
 
       - name: Cache Buildozer global directory
         uses: actions/cache@v4
@@ -35,7 +37,7 @@ jobs:
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
-          command: buildozer android debug 2
+          command: buildozer android debug 2>/dev/null
           buildozer_version: stable
 
 
@@ -44,4 +46,3 @@ jobs:
         with:
           name: package
           path: ${{ steps.buildozer.outputs.filename }}
-
