@@ -37,7 +37,7 @@ android.minapi = 21
 # android.sdk = 27
 
 # (str) Android NDK version to use
-android.ndk = 21.4.7075529
+android.ndk = 26.3.11579264
 
 # (list) Android NDK modules to add (currently supported: sdl2, python3)
 android.ndk_modules = python3
