@@ -16,6 +16,8 @@ jobs:
       
       - name: Accept Android SDK License Agreement
         run: echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --licenses
+      - name: Install Android SDK Build Tools
+        run: $ANDROID_HOME/tools/bin/sdkmanager build-tools;35.0.0-rc4
 
       - name: Install Aidl
         run: sudo apt-get install -y aidl  # Install Aidl package
