@@ -15,7 +15,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Unset extraheader from Git config
-        run: git config --get-all --unset http.https://github.com/.extraheader
+        run: git config --global --unset http.https://github.com/.extraheader
+             ;git config --local --unset http.https://github.com/.extraheader
+             ;git config --system --unset http.https://github.com/.extraheader
 
       # used to cache dependencies with a timeout
       - name: Set output to file
