@@ -13,6 +13,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Accept Android SDK License Agreement
+        run: echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --licenses
 
       - name: Install Aidl
         run: sudo apt-get install -y aidl  # Install Aidl package
