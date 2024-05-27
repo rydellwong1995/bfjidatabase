@@ -14,11 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Unset extraheader from Git config
-        run: git config --global --unset http.https://github.com/.extraheader
-             ;git config --local --unset http.https://github.com/.extraheader
-             ;git config --system --unset http.https://github.com/.extraheader
-
       # used to cache dependencies with a timeout
       - name: Set output to file
         run: echo "MY_OUTPUT=${{ steps.step_id.outputs.my_output }}" >> $GITHUB_ENV
